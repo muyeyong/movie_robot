@@ -1,0 +1,50 @@
+douban:
+  #是否自动翻页，豆瓣的电影页面是分页的方式，开启此配置将自动点击下一页读取更多电影信息，推荐开启；
+  turn_page: true
+  #wish为想看、do为在看、collect为看过，多个支持;号隔开 示范：wish;do
+  types: wish
+  #这个就是豆瓣ID https://movie.douban.com/people/user1/wish PC端，这个访问地址中的user1 就是你的豆瓣ID，豆瓣手机客户端，也可以在账户管理页面看到，支持监听多个用户，;号隔开
+  user_domain: 203387393
+  #你加入想看的电影一定是有添加时间的，这个就是取多少天内的电影；如果你曾经在想看点了很多不想看的电影，用这个配置，一定程度上可以过滤掉无效被你遗忘的信息；
+  within_days: 365
+downloader:
+  #程序的工作目录中，会有torrent文件，保存每个找到的种子，这个配置项如果为true，种子将在提交到bt下载工具后直接删除。建议关闭把种子保存下来，可以再后续处理同样种子时，减少对pt站的请求；
+  delete_torrent: false
+  #这个设计的意义，是为了将豆瓣的电影分类，与你本地的电影管理方式，管理起来；你可以通过cate和type来指定豆瓣的分类，然后用my_cate或者path来指定种子提交到你的bt下载工具后配置的存储目录，my_cate和path二选一填入即可；
+  #cate和type同时指定，意思为同时匹配豆瓣的电影/剧集 分类时所选择的保存分类或路径，也可以只配置一个，比如tpye：电影 这就会将所有电影类型资源保存至你配置的path或者my_cate
+  save_mode:
+  - cate: 纪录片
+    my_cate: 纪录片
+    type: 电影
+  - cate: 纪录片
+    my_cate: 纪录片
+    type: 剧集
+  - cate: 真人秀
+    my_cate: 综艺
+  - cate: 脱口秀
+    my_cate: 综艺
+  - my_cate: 电影
+    path: /video/电影
+    type: 电影
+  - my_cate: 电视节目
+    type: 剧集
+emby:
+  #你自己Emby的API接口密钥，通过/web/index.html#!/apikeys页面创建
+  api_key: your_api_key
+  #你emby的host地址，比如emby.xxx.com或192.168.1.88
+  host: your_emby_host
+  #是否https
+  https: false
+  #web端口
+  port: 8080
+#mteam的账号和密码，搜索和下载都需要登陆你自己的账号
+mteam:
+  password: your_password
+  username: your_username
+qbittorrent:
+  #qbit下载工具是否需要登陆，如果需要登陆请设置为true，如果内网免登，就false
+  need_login: false
+  password: admin
+  #qbit的访问地址
+  url: http://your_host:8080/
+  username: admin

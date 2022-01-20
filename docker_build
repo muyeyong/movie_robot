@@ -1,0 +1,1 @@
+docker buildx build --platform linux/amd64,linux/arm64 -t docker.yee.one:88/movie-robot . --push
