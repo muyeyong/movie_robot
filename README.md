@@ -32,6 +32,6 @@
 查看镜像
 docker images 
 运行镜像
-docker run -it -v -v data:/放置user_config.yml的路劲 movie_robot
+docker run -it -v -v data:/放置user_config.yml的路径 movie_robot
 
 
