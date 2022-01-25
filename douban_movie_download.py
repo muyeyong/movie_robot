@@ -54,7 +54,7 @@ def build_downloader(user_config, workdir):
 
 
 if __name__ == '__main__':
-     # 运行在docker上的时候，workdir = '/app',记得修改, 本地运行 workdir = os.getcwd()
+     # 运行在docker上的时候，workdir = '/data',记得修改, 本地运行 workdir = os.getcwd()
     workdir = os.getcwd()
     if not os.path.exists(workdir):
         print('请提供正确的配置，工作目录不存在：%s' % workdir)
