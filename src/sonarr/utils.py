@@ -19,7 +19,8 @@ class Sonarr:
       self.seasonFolder = seasonFolder
       self.monitored = monitored
       self.headers={
-        'X-Api-Key': api_key
+        'X-Api-Key': api_key,
+        'Content-Type': 'application/json'
       }
       self.server = '%s://%s:%s' % ("https" if is_https else "http", host, port)
 

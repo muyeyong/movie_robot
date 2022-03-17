@@ -14,7 +14,8 @@ class Radarr:
       self.minimumAvailability = minimumAvailability
       self.monitored = monitored
       self.headers={
-        'X-Api-Key': api_key
+        'X-Api-Key': api_key,
+        'Content-Type': 'application/json'
       }
       self.server = '%s://%s:%s' % ("https" if is_https else "http", host, port)
 
@@ -52,15 +53,19 @@ class Radarr:
       print('%s 添加成功' %(r['title']))
 
   def search_not_exist_movie_and_download(self, search_name, imdbId):
-     search_result_list = self.search_not_exist_movie(search_name)
-     if search_result_list  is not None and len(search_result_list) > 0:
-       for idx,result in enumerate(search_result_list):
-         if 'imdbId' in result and result['imdbId'] == imdbId:
-           self.download_movie(result)
-           break
-         if idx >= len(search_result_list):
-           print('%s 添加失败' %(search_name))
-       else:
-        print('没有找到资源')
+    search_result_list = []
+    if (imdbId is not None and imdbId != ''):
+      search_result_list = self.search_not_exist_movie('imdb:'+imdbId)
+    else:
+      search_result_list = self.search_not_exist_movie(search_name)
+    if search_result_list  is not None and len(search_result_list) > 0:
+      for idx,result in enumerate(search_result_list):
+        if 'imdbId' in result and result['imdbId'] == imdbId:
+          self.download_movie(result)
+          break
+        if idx >= len(search_result_list):
+          print('%s 添加失败' %(search_name))
+    else:
+      print('%s 没有找到资源' %(search_name))
 
   
