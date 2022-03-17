@@ -34,4 +34,6 @@ docker images
 运行镜像
 docker run -it -v -v data:/放置user_config.yml的路径 movie_robot
 
+参考博客： https://muyeyong.github.io/2022/01/06/zhe-teng-nas/
+
 
