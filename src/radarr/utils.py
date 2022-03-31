@@ -1,4 +1,5 @@
 import json
+from urllib import error
 
 from numpy import true_divide
 from src.utils.http_utils import RequestUtils
@@ -35,7 +36,10 @@ class Radarr:
   def search_not_exist_movie(self, search_name):
     api = '/api/v3/movie/lookup'
     r = self.req.get(self.server + api, params={'term' :search_name }, headers=self.headers)
-    return json.loads(r)
+    if isinstance(json.loads(r), list):
+      return json.loads(r)
+    else:
+      raise Exception('请求异常')
 
   def download_movie(self, movie_info):
     api = '/api/v3/movie'
@@ -47,16 +51,15 @@ class Radarr:
     params['minimumAvailability'] = self.minimumAvailability
     r = self.req.post(self.server + api, params=json.dumps(params), headers=self.headers)
     r = json.loads(r)
-    if 'errorMessage' in r:
-      print(r['errorMessage'])
-    elif 'title' in r:
-      print('%s 添加成功' %(r['title']))
-
+    if 'title' in r and r['title'] == movie_info['title']:
+      print('%s 添加成功' %(movie_info['title']))
+    else:
+      print('%s 添加失败' %(movie_info['title']))
   def search_not_exist_movie_and_download(self, search_name, imdbId):
     search_result_list = []
-    if (imdbId is not None and imdbId != ''):
+    try:
       search_result_list = self.search_not_exist_movie('imdb:'+imdbId)
-    else:
+    except Exception as e:
       search_result_list = self.search_not_exist_movie(search_name)
     if search_result_list  is not None and len(search_result_list) > 0:
       for idx,result in enumerate(search_result_list):
