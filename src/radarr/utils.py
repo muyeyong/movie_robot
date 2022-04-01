@@ -36,10 +36,7 @@ class Radarr:
   def search_not_exist_movie(self, search_name):
     api = '/api/v3/movie/lookup'
     r = self.req.get(self.server + api, params={'term' :search_name }, headers=self.headers)
-    if isinstance(json.loads(r), list):
-      return json.loads(r)
-    else:
-      raise Exception('请求异常')
+    return json.loads(r)
 
   def download_movie(self, movie_info):
     api = '/api/v3/movie'
@@ -59,6 +56,8 @@ class Radarr:
     search_result_list = []
     try:
       search_result_list = self.search_not_exist_movie('imdb:'+imdbId)
+      if not isinstance(search_result_list, list): 
+        raise Exception('请求异常')
     except Exception as e:
       search_result_list = self.search_not_exist_movie(search_name)
     if search_result_list  is not None and len(search_result_list) > 0:
