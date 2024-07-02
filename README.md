@@ -1,6 +1,7 @@
 功能介绍
 =========================
 定时自动从豆瓣电影的想看、在看、看过中获取影音信息，然后通过Sonarr、Radarr下载管理资源。
+docker: https://hub.docker.com/r/muyeyong/film_robot
 
 **注意，豆瓣读取和检索，未使用OpenAPI（如有任何合规问题请及时联系作者下架源码），但模拟请求的过程中，增加了随机延迟机制来保护网站。本工具只能用于学习和自己研究，禁止用作任何商业用途！**
 
@@ -36,9 +37,9 @@ docker run -it -v -v data:/放置user_config.yml的路径 movie_robot
 
 参考博客： https://muyeyong.github.io/2022/01/06/zhe-teng-nas/
 
-MIT License
+## MIT License
 
-版权所有 (c) [2023] [muyeyong]
+版权所有 (c) [2024] [muyeyong]
 
 特此向任何获得副本的人免费授予许可，以无限制地处理本软件及相关文档文件（以下称为“软件”），包括但不限于使用、复制、修改、合并、出版、分发、再许可和/或销售本软件的副本，并允许向其提供本软件的人这样做，但须符合以下条件：
 
